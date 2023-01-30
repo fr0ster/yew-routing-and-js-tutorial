@@ -1,17 +1,19 @@
 use yew::prelude::*;
+use configurable_styling_component::ConfigurableStylingComponent;
 mod data_source;
+mod configurable_styling_component;
 struct App;
 impl Component for App {
     type Message = ();
     type Properties = ();
     
-    fn create(_ctx: &Context<Self>) -> Self {
+    fn create(ctx: &Context<Self>) -> Self {
         Self
     }
-    fn view(&self, _ctx: &Context<Self>) -> Html {
+    fn view(&self, ctx: &Context<Self>) -> Html {
         let data = data_source::get_data();
         let cur_data_html = data.iter().map(|data_point| {
-            html! { 
+            html! {
                 <tr class={match data_point.value {
                     x if x >= 100.0 => "success".to_string(),
                     x if x == 0.0 => "warning".to_string(),
@@ -42,6 +44,9 @@ impl Component for App {
                             </tbody>
                         </table>
                     </div>
+                    <ConfigurableStylingComponent message="element 1" is_dark_mode={true} has_shadow={true} is_rounded={true} />
+                    <ConfigurableStylingComponent message="element 2" is_dark_mode={false} has_shadow={true} is_rounded={true} />
+                    <ConfigurableStylingComponent message="element 3" is_dark_mode={false} has_shadow={true} is_rounded={false} />
                 </div>
             </div>
         }   
