@@ -1,4 +1,5 @@
 use yew::prelude::*;
+mod data_source;
 struct App;
 impl Component for App {
     type Message = ();
@@ -8,10 +9,39 @@ impl Component for App {
         Self
     }
     fn view(&self, _ctx: &Context<Self>) -> Html {
+        let data = data_source::get_data();
+        let cur_data_html = data.iter().map(|data_point| {
+            html! { 
+                <tr class={match data_point.value {
+                    x if x >= 100.0 => "success".to_string(),
+                    x if x == 0.0 => "warning".to_string(),
+                    x if x < 0.0 => "danger".to_string(),
+                    _ => "".to_string()
+                }}>
+                    <td>{data_point.item_name.clone()}</td>
+                    <td>{data_point.quantity}</td>
+                    <td>{data_point.value}</td>
+                </tr>
+            }
+        });
         html! {
             <div class="section">
                 <div class="container">
                     <h1 class="title">{"Main page"}</h1>
+                    <div>
+                        <table class="table is-hoverable is-striped">
+                            <thead>
+                                <tr>
+                                    <th>{"Item"}</th>
+                                    <th>{"Quantity"}</th>
+                                    <th>{"Value"}</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                            {for cur_data_html}
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
             </div>
         }   
