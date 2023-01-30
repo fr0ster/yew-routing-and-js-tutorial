@@ -2,6 +2,7 @@ use yew::prelude::*;
 use configurable_styling_component::ConfigurableStylingComponent;
 mod data_source;
 mod configurable_styling_component;
+mod bindings;
 struct App;
 impl Component for App {
     type Message = ();
@@ -30,6 +31,7 @@ impl Component for App {
             <div class="section">
                 <div class="container">
                     <h1 class="title">{"Main page"}</h1>
+                    <h2 class="subtitle">{bindings::get_now_date()}</h2>
                     <div>
                         <table class="table is-hoverable is-striped">
                             <thead>
