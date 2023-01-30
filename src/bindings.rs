@@ -12,4 +12,6 @@ extern "C" {
     pub fn new() -> MyChart;
     #[wasm_bindgen(method)]
     pub fn draw(this: &MyChart, element_id: &str);
+    #[wasm_bindgen(method)]
+    pub fn update(this: &MyChart, value: i32);
 }

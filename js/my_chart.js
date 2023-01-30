@@ -30,4 +30,12 @@ export class MyChart {
             this.config
         )
     }
+    update(value) {
+        let labels = this.chart.data.labels;
+        console.log("Updating chart labels");
+        labels.push(labels.length+1);
+        console.log("Updating chart data");
+        this.chart.data.datasets[0].data.push(value);
+        this.chart.update()
+    }
 }
