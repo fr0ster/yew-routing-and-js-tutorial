@@ -7,10 +7,10 @@ impl Component for App {
     type Message = ();
     type Properties = ();
     
-    fn create(ctx: &Context<Self>) -> Self {
+    fn create(_ctx: &Context<Self>) -> Self {
         Self
     }
-    fn view(&self, ctx: &Context<Self>) -> Html {
+    fn view(&self, _ctx: &Context<Self>) -> Html {
         let data = data_source::get_data();
         let cur_data_html = data.iter().map(|data_point| {
             html! {
